@@ -49,6 +49,35 @@ message(STATUS "CMAKE_CXX_STANDARD: ${CMAKE_CXX_STANDARD}")
 
 # 编译标志
 
+if(WIN32)
+    if(MSVC)
+        # 设置警告等级，/W3
+        if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+            string(REGEX REPLACE "/W[0-4]" "/W3" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+        else()
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W3")
+        endif()
+    endif()
+
+    # 禁止4127 4201 警告
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4127 /wd4201")
+
+    # 设置RelWithDebinfo
+    # Zi 生成单独PDB文件
+    # MP 多核编译
+    # Od 关闭程序中的所有优化并加快编译速度
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/Zi /MP /Od")
+
+    # 添加预编译宏 DEBUG _DEBUG
+    set(CMAKE_CXX_FLAGS_DEBUG "/DDEBUG=1 /D_DEBUG=1 ${CMAKE_CXX_FLAGS_DEBUG}")
+
+    # 禁止链接器生成带有安全异常处理程序表的映像（为了兼容其他模块，降低安全性）
+    if(NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
+		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
+		set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /SAFESEH:NO")
+		set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} /SAFESEH:NO")
+	endif()
+endif()
 
 # 添加子目录
 

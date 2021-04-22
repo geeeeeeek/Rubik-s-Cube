@@ -29,7 +29,7 @@ set(RESOURCE
 
 # 编译
 
-add_executable(${PROJECT_NAME} 
+add_executable(${PROJECT_NAME} WIN32
     ${SOURCE}
     ${INCLUDE}
     ${RESOURCE}
