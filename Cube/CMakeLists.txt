@@ -13,6 +13,11 @@ if(NOT Qt6Quick_FOUND)
     message(FATAL_ERROR "Failed to find Qt6Quick")
 endif()
 
+find_package(Qt6OpenGL REQUIRED)
+if(NOT Qt6OpenGL_FOUND)
+    message(FATAL_ERROR "Failed to find Qt6OpenGL")
+endif()
+
 # 添加源码
 
 set(SOURCE
