@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickWindow>
-#include "OpenGLWindow.h"
+#include "squircle.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 
     QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
 
-    qmlRegisterType<OpenGLWindow>("OpenGLUnderQML", 1, 0, "OpenGLWindow");
+    qmlRegisterType<Squircle>("OpenGLUnderQML", 1, 0, "Squircle");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/Qml/main.qml"));

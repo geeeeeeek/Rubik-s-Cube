@@ -1,4 +1,4 @@
-project(Cube)
+project(Triangle)
 
 
 # 引入第三方库
@@ -32,19 +32,17 @@ endif()
 
 set(SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/main.cpp
-    # ${CMAKE_CURRENT_SOURCE_DIR}/Source/squircle.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/OpenGLWindow.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/OpenGLRenderer.cpp
 )
 
 set(INCLUDE
-    # ${CMAKE_CURRENT_SOURCE_DIR}/Include/squircle.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Include/OpenGLWindow.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Include/OpenGLRenderer.h
 )
 
 set(RESOURCE
-    ${CMAKE_CURRENT_SOURCE_DIR}/Resource/Cube.qrc
+    ${CMAKE_CURRENT_SOURCE_DIR}/Resource/Triangle.qrc
 )
 
 # 编译
@@ -54,6 +52,8 @@ add_executable(${PROJECT_NAME} WIN32
     ${INCLUDE}
     ${RESOURCE}
 )
+
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "Test")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Include
@@ -76,7 +76,7 @@ DeployQt(${PROJECT_NAME})
 
 # vs 设置
 if(MSVC)
-    set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+    # set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
     set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_COMMAND "${PRO_OUTPUT_DIR}/${PROJECT_NAME}/$<TARGET_FILE_NAME:${PROJECT_NAME}>")
     set_target_properties(${PROJECT_NAME} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${PRO_OUTPUT_DIR}/${PROJECT_NAME}")
 endif()

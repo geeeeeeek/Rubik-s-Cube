@@ -33,6 +33,9 @@ message(STATUS "current postfix: ${CMAKE_DEBUG_POSTFIX}")
 # 包含当前目录
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+# 使用解决方案文件夹
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 # Qt设置
 
 set(CMAKE_AUTOMOC ON)
@@ -82,3 +85,5 @@ endif()
 # 添加子目录
 
 add_subdirectory(Cube)
+add_subdirectory(Test/Squircle)
+add_subdirectory(Test/Triangle)

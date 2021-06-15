@@ -9,7 +9,7 @@ function(InstallToBinDir target)
     POST_BUILD
     COMMAND "${CMAKE_COMMAND}" -E copy
         "$<TARGET_FILE:${target}>"
-        "${PRO_OUTPUT_DIR}/$<TARGET_FILE_NAME:${target}>"
+        "${PRO_OUTPUT_DIR}/${target}/$<TARGET_FILE_NAME:${target}>"
     )
 
     add_custom_command(TARGET ${target}
@@ -18,7 +18,7 @@ function(InstallToBinDir target)
     "-DCONFIG=$<CONFIGURATION>"
     "-DFNAME=$<TARGET_FILE_NAME:${target}>"
     "-DINPUT=$<TARGET_FILE_DIR:${target}>"
-    "-DOUTPUT=${PRO_OUTPUT_DIR}"
+    "-DOUTPUT=${PRO_OUTPUT_DIR}/${target}"
     -P "${CMAKE_SOURCE_DIR}/Cmake/Scripts/CopyDebugHelper.cmake"
     )
 endfunction()
@@ -36,7 +36,7 @@ function(DeployQt target)
     "-DCONFIG=$<CONFIG>"
     "-DQMLDIR=${QT6DIR}/qml"
     "-DEXEDIR=${QT6DIR}/bin"
-    "-DOUTPATH=${PRO_OUTPUT_DIR}/$<TARGET_FILE_NAME:${target}>"
+    "-DOUTPATH=${PRO_OUTPUT_DIR}/${target}/$<TARGET_FILE_NAME:${target}>"
     -P "${CMAKE_SOURCE_DIR}/Cmake/Scripts/DeployQtHelper.cmake"
     )
 endfunction()
